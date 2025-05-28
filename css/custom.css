@@ -1,4 +1,129 @@
-z/* 一图流 */
+/* lmark */
+/* 这段代码让侧边栏小卡片、最新文章项、页面布局的首个子元素、文章页面的主要内容块等元素都拥有半透明的白色背景
+（80%不透明），使内容区与背景有区分但又不过于突兀。 */
+#aside-content .card-widget,
+#recent-posts>.recent-post-item,
+.layout_page>div:first-child:not(.recent-posts),
+.layout_post>#page,
+.layout_post>#post,
+.read-mode .layout_post>#post {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* 设置副标题的字间距为3px，并指定一系列优先使用的字体族，兼容中英文显示。 */
+#subtitle {
+    letter-spacing: 3px;
+    font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+
+/* 文章标题增加0.4秒的过渡动画。鼠标悬停在最近文章项时，该项的标题会向右平滑移动8px，提升交互感。 */
+.article-title {
+    transition: 0.4s;
+}
+.recent-post-item:hover .article-title {
+    transform: translateX(8px);
+}
+
+/* 个人信息卡片高度378px，带0.5秒动画。悬停时背景变成完全不透明的白色，透明度变为1。 */
+#aside-content .card-info {
+    height: 378px;
+    transition: 0.5s;
+    /* opacity: 0.8; */
+}
+#aside-content .card-info:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 1);
+}
+
+/* 对社交图标做动画：初始不透明度为0，下移25px，动画延迟由自定义属性 --i 控制（每个图标依次出现）。
+悬停卡片或出现在搜索按钮时，图标回到原位并显示出来。悬停图标时不做变形。 */
+.social-icon:nth-child(n) { --i: n; }
+.social-icon {
+    display: inline-block;
+    transition: 0.5s;
+    opacity: 0;
+    transform: translateY(25px);
+    transition-delay: calc(0.1s * var(--i))
+}
+#search-button .social-icon {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: none !important;
+}
+#aside-content .card-info:hover .social-icon {
+    transform: translateY(0);
+    opacity: 1;
+}
+.social-icon .fab:hover {
+    transform: none;
+}
+
+/* 整体页面包裹区域使用30%不透明度的黑色半透明背景，增加深度感。 */
+#body-wrap{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 导航栏相关样式：
+      移除所有元素伪类下划线蓝条。
+      鼠标悬停站点名、菜单项、搜索按钮时字体放大到24px。
+      菜单项居中显示。
+      右侧导航内容靠右，横向排列，不换行。
+      固定导航时，整体下移58px，适配不同浏览器。
+      关闭导航栏的动画过渡，立即响应。 */
+#nav *::after{
+    background-color: transparent!important;
+}
+#nav #site-name:hover,
+#nav .menus_item:hover,
+#nav #search-button:hover{
+    font-size:24px;
+}
+#nav .menus_items {
+    position: absolute;
+    width: fit-content;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#nav-right{
+    flex:1 1 auto;
+    justify-content: flex-end;
+    margin-left: auto;
+    display: flex;
+    flex-wrap:nowrap;
+}
+.nav-fixed #nav{
+    transform: translateY(58px)!important;
+    -webkit-transform: translateY(58px)!important;
+    -moz-transform: translateY(58px)!important;
+    -ms-transform: translateY(58px)!important;
+    -o-transform: translateY(58px)!important;
+}
+#nav{
+    transition: none!important;
+    -webkit-transition: none!important;
+    -moz-transition: none!important;
+    -ms-transition: none!important;
+    -o-transition: none!important;
+}
+
+/* 引入了思源黑体等中文等宽字体（LXGWWenKaiMono），优先使用，找不到则用系统字体。
+    font-display: swap; 优化字体加载，防止闪烁。 */
+@font-face {
+    font-family: 'LXGWWenKaiMono';
+    font-display: swap;
+    src: url('https://cdn.lmark.cc/LXGWWenKaiMonoLite-Bold.ttf') format('truetype');
+}
+body {
+    font-family: LXGWWenKaiMono ,-apple-system
+}
+
+/* 背景滤镜变化时有0.3秒过渡动画，提升视觉平滑度 */
+#web_bg{
+    transition: filter 0.3s;
+}
+
+
+/* 一图流 */
 /* 页脚与头图透明 */
 #footer {
   background: transparent !important;
