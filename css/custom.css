@@ -464,3 +464,29 @@ h6::before {
     box-shadow: 0px 0px 1px 1px #39c5bb;
   }
 }
+
+
+
+/* ① 隐藏文字初始透明，并且给整个 span 一块灰色底 */
+.spoiler {
+  color: transparent;
+  background-color: #f0f0f0;  /* 隐藏状态下的背景色，比如浅灰色 */
+  cursor: pointer;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+  font-weight: bold;          /* 如果需要，可以继续加粗等 */
+  text-decoration: underline; /* 如果需要下划线，则保留 */
+}
+
+/* ② 悬停时：文字显现并换成想要的颜色，同时背景改为透明（或其他颜色） */
+.spoiler:hover {
+  color: red;             /* 悬停时文字颜色，比如深红色 */
+  background-color: transparent; /* 悬停的时候把背景去掉或换成别的 */
+  font-weight: bold;          /* 继续加粗 */
+  text-decoration: underline; /* 继续下划线 */
+}
+
+
+
+
